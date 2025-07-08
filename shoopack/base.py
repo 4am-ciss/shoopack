@@ -29,11 +29,20 @@ class RequesterBase(ABC):
     @abstractmethod
     def send(self, message: Any) -> Any:
         """Send a request and return the response."""
-        pass
+        raise NotImplementedError
 
 
 class ResponderBase(ABC):
     @abstractmethod
     def listen(self, callback: Callable[[Any], Any]) -> None:
         """Listen for requests and respond using the callback result."""
-        pass
+        raise NotImplementedError
+
+    @abstractmethod
+    def receive(self) -> None:
+        """"""
+        raise NotImplementedError
+
+    @abstractmethod
+    def send(self, message):
+        raise NotImplementedError

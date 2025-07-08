@@ -16,7 +16,7 @@ def create_publisher(backend: str, **kwargs) -> PublisherBase:
 def create_subscriber(backend: str, **kwargs) -> SubscriberBase:
     """
 
-    :param backend: 
+    :param backend:
     :param kwargs:
     :return:
     """
@@ -39,3 +39,9 @@ def create_responder(backend: str, **kwargs) -> ResponderBase:
         return ZmqResponder(**kwargs)
     else:
         raise ValueError(f"Unsupported responder backend: {backend}")
+
+def create_client(backend: str, **kwargs):
+    return create_requester(backend, **kwargs)
+
+def create_server(backend: str, **kwargs):
+    return create_responder(backend, **kwargs)

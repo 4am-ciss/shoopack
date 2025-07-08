@@ -20,3 +20,21 @@ def is_running_in_container():
         return False
     except Exception:
         return False
+
+
+def is_port_in_use(port: int, host: str = 'localhost') -> bool:
+    """
+    Check if a specific port is in use on the given host.
+
+    Args:
+        port (int): The port number to check.
+        host (str): The host address (default is 'localhost').
+
+    Returns:
+        bool: True if the port is in use, False otherwise.
+    """
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        result = sock.connect_ex((host, port))
+        return result == 0
+
+
