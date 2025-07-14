@@ -13,6 +13,8 @@
 [//]: # (or )
 ```bash
 pip install git+https://github.com/4am-ciss/shoopack
+# If you want to install the latest version from the repository, use:
+pip install git+https://github.com/4am-ciss/shoopack -U
 ```
 
 ## Usage
