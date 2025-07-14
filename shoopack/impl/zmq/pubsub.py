@@ -182,7 +182,7 @@ class ZmqSubscriber(SubscriberBase):
         return str(self.__repr__())
 
 
-    def receive(self, ignore_timeout: bool = False) -> Union[str, bytes, dict, list, None]:
+    def receive(self, ignore_timeout: bool = True) -> Union[str, bytes, dict, list, None]:
         """
         Receive a message from the socket.
         It will be BLOCKING until a message is received or the timeout is reached.
@@ -364,7 +364,7 @@ class ZmqPairingPubSub(PairingPubSubBase):
         b_msg = _typed_multipart_message(message, self.topic_name, self.chunk_size)
         self.target_socket.send_multipart(b_msg)
 
-    def receive(self, ignore_timeout: bool = False) -> Union[str, bytes, dict, list, None]:
+    def receive(self, ignore_timeout: bool = True) -> Union[str, bytes, dict, list, None]:
         """
         Receive a message from the source socket.
         It will be BLOCKING until a message is received or the timeout is reached.

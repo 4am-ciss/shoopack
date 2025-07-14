@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Callable, Any
+from typing import Callable, Any, Union
 
 
 # ===== Pub/Sub Interface =====
@@ -18,7 +18,7 @@ class PublisherBase(ABC):
 
 class SubscriberBase(ABC):
     @abstractmethod
-    def receive(self) -> Any:
+    def receive(self, ignore_timeout: bool = True) -> Union[str, bytes, dict, list, None]:
         """Receive a message from the publisher."""
         raise NotImplementedError
 
@@ -44,7 +44,7 @@ class PairingPubSubBase(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def receive(self) -> Any:
+    def receive(self, ignore_timeout: bool = True) -> Any:
         """Receive a message from the peer."""
         raise NotImplementedError
 
