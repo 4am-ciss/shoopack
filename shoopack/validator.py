@@ -49,5 +49,3 @@ def network_validation(address, port, protocol):
         if not os.access(address, os.W_OK):
             raise ValueError(f"IPC address {address} is not writable. Check permissions.")
 
-    if is_port_in_use(port, address):
-        raise ValueError(f"Port {port} on address {address} is already in use.")

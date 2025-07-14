@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="shoopack",
-    version="0.0.0-alpha",
+    version="0.0.0-alpha.1",
     packages=find_packages(),
     install_requires=[
         "pyzmq",
