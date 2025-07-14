@@ -59,19 +59,6 @@ class ZmqResponder(ResponderBase):
         self._thread = None
         self._listen_loop = False
 
-    def listen(self, callback: Callable) -> None:
-        """
-
-        :param callback:
-        :return:
-        """
-        while self._listen_loop:
-            try:
-                msg = self.socket.recv_json()
-                res = callback(msg)
-                self.socket.send_json(res)
-            except Exception as e:
-                self.socket.send_json({"error": str(e)})
 
     def receive(self):
         """

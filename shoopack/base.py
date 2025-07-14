@@ -10,16 +10,57 @@ class PublisherBase(ABC):
         """Send a message to subscribers."""
         raise NotImplementedError
 
+    @abstractmethod
+    def close(self) -> None:
+        """Close the publisher."""
+        raise NotImplementedError
+
 
 class SubscriberBase(ABC):
     @abstractmethod
-    def listen(self, callback: Callable[[Any], None]) -> None:
-        """Listen for messages and handle them via the callback."""
+    def receive(self) -> Any:
+        """Receive a message from the publisher."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def listen(self, **kwargs) -> None:
+        """Start listening for messages."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def get(self) -> Any:
+        """Get the last received message."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def close(self) -> None:
+        """Close the subscriber."""
+        raise NotImplementedError
+
+class PairingPubSubBase(ABC):
+    @abstractmethod
+    def publish(self, message: Any) -> None:
+        """Send a message to the peer."""
         raise NotImplementedError
 
     @abstractmethod
     def receive(self) -> Any:
-        """Receive a message from the publisher."""
+        """Receive a message from the peer."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def listen(self, **kwargs) -> None:
+        """Start listening for messages."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def get(self) -> Any:
+        """Get the last received message."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def close(self) -> None:
+        """Close the pairing pub/sub."""
         raise NotImplementedError
 
 
@@ -31,13 +72,13 @@ class RequesterBase(ABC):
         """Send a request and return the response."""
         raise NotImplementedError
 
-
-class ResponderBase(ABC):
     @abstractmethod
-    def listen(self, callback: Callable[[Any], Any]) -> None:
-        """Listen for requests and respond using the callback result."""
+    def receive(self) -> None:
+        """Receive a response from the server."""
         raise NotImplementedError
 
+
+class ResponderBase(ABC):
     @abstractmethod
     def receive(self) -> None:
         """"""
@@ -46,3 +87,4 @@ class ResponderBase(ABC):
     @abstractmethod
     def send(self, message):
         raise NotImplementedError
+
